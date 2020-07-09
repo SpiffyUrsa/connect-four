@@ -16,7 +16,7 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard(WIDTH_BOARD, HEIGHT_BOARD) {
-  for (let y = 1; y <= HEIGHT_BOARD; y++) {
+  for (let y = 0; y < HEIGHT_BOARD; y++) {
     board.push(Array.from({ length: WIDTH_BOARD }));
   }
 }
@@ -58,7 +58,7 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(xAxis) {
-  for (let yAxis = HEIGHT_BOARD; yAxis >= 1; yAxis--) {
+  for (let yAxis = HEIGHT_BOARD - 1; yAxis >= 0; yAxis--) {
     if (board[yAxis][xAxis] === undefined) {
       return yAxis;
     }
@@ -131,17 +131,17 @@ function checkForWin() {
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
-        y < HEIGHT &&
+        y < HEIGHT_BOARD &&
         x >= 0 &&
-        x < WIDTH &&
+        x < WIDTH_BOARD &&
         board[y][x] === currPlayer
     );
   }
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
+  for (var y = 0; y < HEIGHT_BOARD; y++) {
+    for (var x = 0; x < WIDTH_BOARD; x++) {
       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
@@ -154,5 +154,5 @@ function checkForWin() {
   }
 }
 
-makeBoard();
+makeBoard(WIDTH_BOARD, HEIGHT_BOARD);
 makeHtmlBoard();
