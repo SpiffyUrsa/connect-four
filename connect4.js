@@ -85,28 +85,28 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let xAxis = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
-  if (y === null) {
+  let yAxis = findSpotForCol(xAxis);
+  if (yAxis === null) {
     return;
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
-  placeInTable(y, x);
+  board[yAxis][xAxis] = currPlayer;
+  placeInTable(yAxis, xAxis);
 
   // check for win
   if (checkForWin()) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
-  // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  // check for tie - if all cells in board are filled then call endGame
+  if(board.every((row) => row.every((cell) => cell !== undefined))) endGame();
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
+  currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
