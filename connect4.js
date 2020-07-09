@@ -15,20 +15,17 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
+ // Makes the javascript board to hold all of the player piece data.
 function makeBoard(WIDTH_BOARD, HEIGHT_BOARD) {
   for (let y = 0; y < HEIGHT_BOARD; y++) {
     board.push(Array.from({ length: WIDTH_BOARD }));
   }
 }
 
-
-// First figure out how many empty rows are going be in the board array.
-// For each iteration over the height of the board push in an array that is the width of the board.
-
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
+// Makes the HTML board layout.
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   let htmlBoard = document.getElementById('board');
 
   // Creates a top row that allows a player to click a cell and place a gamepiece in the respective column
@@ -57,6 +54,8 @@ function makeHtmlBoard() {
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
+// Checks each spot in the column to see if it is occupied. If not, returns the yAxis value.
+// If all spots are occupied, returns null.
 function findSpotForCol(xAxis) {
   for (let yAxis = HEIGHT_BOARD - 1; yAxis >= 0; yAxis--) {
     if (board[yAxis][xAxis] === undefined) {
@@ -91,33 +90,34 @@ function placeInTable(yAxis, xAxis) {
 function endGame(msg) {
   // TODO: pop up alert message
 }
+// do this
 
 /** handleClick: handle click of column top to play piece */
 
+// Handles the click functionality to drop pieces on the board and checks for win condition.
 function handleClick(evt) {
   // get x from ID of clicked cell
   let xAxis = +evt.target.id;
-
   // get next spot in column (if none, ignore click)
   let yAxis = findSpotForCol(xAxis);
   if (yAxis === null) {
     return;
   }
-
   // place piece in board and add to HTML table
   board[yAxis][xAxis] = currPlayer;
   placeInTable(yAxis, xAxis);
-
   // check for win
   if (checkForWin()) {
     return endGame(`Player ${currPlayer} won!`);
   }
-
   // check for tie - if all cells in board are filled then call endGame
-  if(board.every((row) => row.every((cell) => cell !== undefined))) endGame();
-
+  if(board.every((row) => 
+      row.every((cell) => 
+          cell !== undefined))) {
+            endGame()
+          };
   // switch players
-  currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
+  currPlayer = currPlayer === 1 ? 2 : 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
