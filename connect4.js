@@ -85,10 +85,14 @@ function placeInTable(yAxis, xAxis) {
   targetCell.append(piece);
 }
 
-/** endGame: announce game end */
-
+//announce game end 
 function endGame(msg) {
-  // TODO: pop up alert message
+  setTimeout(function(){
+    alert(msg)
+  }, 300);
+  //remove event handler to stop further moves
+  let playRow = document.getElementById('column-top');
+  playRow.removeEventListener('click', handleClick);
 }
 // do this
 
@@ -114,7 +118,7 @@ function handleClick(evt) {
   if(board.every((row) => 
       row.every((cell) => 
           cell !== undefined))) {
-            endGame()
+            endGame('Players Tie!');
           };
   // switch players
   currPlayer = currPlayer === 1 ? 2 : 1;
