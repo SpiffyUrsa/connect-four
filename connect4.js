@@ -5,19 +5,24 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+const WIDTH_BOARD = 7;
+const HEIGHT_BOARD = 6;
 
-var currPlayer = 1; // active player: 1 or 2
-var board = []; // array of rows, each row is array of cells  (board[y][x])
+let currPlayer = 1; // active player: 1 or 2
+let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
 
-function makeBoard() {
+function makeBoard(WIDTH_BOARD, HEIGHT_BOARD) {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  for (let i = 1; i <= HEIGHT_BOARD; i++) {
+    board.push(Array.from({ length: WIDTH_BOARD }));
+  }
 }
+// First figure out how many empty rows are going be in the board array.
+// For each iteration over the height of the board push in an array that is the width of the board.
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
