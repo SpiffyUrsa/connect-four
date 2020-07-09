@@ -16,11 +16,12 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard(WIDTH_BOARD, HEIGHT_BOARD) {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  for (let i = 1; i <= HEIGHT_BOARD; i++) {
+  for (let y = 1; y <= HEIGHT_BOARD; y++) {
     board.push(Array.from({ length: WIDTH_BOARD }));
   }
 }
+
+
 // First figure out how many empty rows are going be in the board array.
 // For each iteration over the height of the board push in an array that is the width of the board.
 
@@ -58,13 +59,20 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  
 }
+
+//
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
-function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+// Update the board to place the correct piece into the HTML board
+function placeInTable(yAxis, xAxis) {
+  let piece = document.createElement("div");
+  piece.classList.add("piece");
+  piece.classList.add(`p${currPlayer}`);
+  let targetCell = document.getElementById(`${yAxis}-${xAxis}`)
+  targetCell.append(piece);
 }
 
 /** endGame: announce game end */
