@@ -57,12 +57,23 @@ function makeHtmlBoard() {
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
-function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  
+function findSpotForCol(xAxis) {
+  for (let yAxis = HEIGHT_BOARD; yAxis >= 1; yAxis--) {
+    if (board[yAxis][xAxis] === undefined) {
+      return yAxis;
+    }
+  }
+  return null;
 }
 
-//
+// Iterate from the total height towards the top of the gameboard (iterating from bottom to top)
+// check the board array to see if it is already filled. If it is, then continue the loop. if not,
+// return the y value there.
+// return null
+
+// Right now, the game drops always drops a piece to the top of the column, 
+// even if a piece is already there. Fix this function so that it finds the lowest empty spot 
+// in the game board and returns the y coordinate (or null if the column is filled).
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
