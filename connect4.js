@@ -28,25 +28,26 @@ function makeBoard(WIDTH_BOARD, HEIGHT_BOARD) {
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  let htmlBoard = document.getElementById('board');
 
-  // TODO: add comment for this code
-  var top = document.createElement("tr");
-  top.setAttribute("id", "column-top");
-  top.addEventListener("click", handleClick);
+  // Creates a top row that allows a player to click a cell and place a gamepiece in the respective column
+  let playRow = document.createElement("tr");
+  playRow.setAttribute("id", "column-top");
+  playRow.addEventListener("click", handleClick);
 
-  for (var x = 0; x < WIDTH; x++) {
-    var headCell = document.createElement("td");
-    headCell.setAttribute("id", x);
-    top.append(headCell);
+  for (let xAxis = 0; xAxis < WIDTH_BOARD; xAxis++) {
+    let playCell = document.createElement("td");
+    playCell.setAttribute("id", xAxis);
+    playRow.append(playCell);
   }
-  htmlBoard.append(top);
+  htmlBoard.append(playRow);
 
-  // TODO: add comment for this code
-  for (var y = 0; y < HEIGHT; y++) {
-    const row = document.createElement("tr");
-    for (var x = 0; x < WIDTH; x++) {
-      const cell = document.createElement("td");
-      cell.setAttribute("id", `${y}-${x}`);
+  // Creating each row and column of the game board
+  for (let yAxis = 0; yAxis < HEIGHT_BOARD; yAxis++) {
+    let row = document.createElement("tr");
+    for (let xAxis = 0; xAxis < WIDTH_BOARD; xAxis++) {
+      let cell = document.createElement("td");
+      cell.setAttribute("id", `${yAxis}-${xAxis}`);
       row.append(cell);
     }
     htmlBoard.append(row);
