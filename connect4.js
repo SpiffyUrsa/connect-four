@@ -89,7 +89,7 @@ function placeInTable(yAxis, xAxis) {
 function endGame(msg) {
   setTimeout(function(){
     alert(msg)
-  }, 300);
+  }, 1200);
   //remove event handler to stop further moves
   let playRow = document.getElementById('column-top');
   playRow.removeEventListener('click', handleClick);
